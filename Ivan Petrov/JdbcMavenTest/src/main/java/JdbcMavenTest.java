@@ -12,7 +12,7 @@ public class JdbcMavenTest {
 
 
     public static void main(String[] args){
-        System.out.println("Hello from jdbcSQLiteConnection");
+        System.out.println("Hello from jdbcSQLiteConnection and Telega bot");
         // System.out.println(MySQLiteDataBase.getSelect());
 
         //"заставил" свое приложение и Java машину

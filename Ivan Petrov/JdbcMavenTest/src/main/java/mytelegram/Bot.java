@@ -1,5 +1,6 @@
 package mytelegram;
 
+import database.MySQLiteDataBase;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -36,7 +37,14 @@ public class Bot extends TelegramLongPollingBot {
             {
                 long chat_id = update.getMessage().getChatId();
                 sendMsg(update.getMessage().
-                        getChatId().toString(), "две команды: /time и /help /empl");
+                        getChatId().toString(), "три команды: /time , /help  и /empl");
+            }
+            else if (message_text.equals("/empl"))
+            {
+                String messageSend = MySQLiteDataBase.getSelect();
+                long chat_id = update.getMessage().getChatId();
+                sendMsg(update.getMessage().
+                        getChatId().toString(), messageSend);
             }
             else//в ответ отправл¤ю эхом то, что пришло
             {
