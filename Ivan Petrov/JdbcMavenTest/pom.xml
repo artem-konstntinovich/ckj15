@@ -22,6 +22,14 @@
             <version>3.8.11.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+
 
     </dependencies>
 
