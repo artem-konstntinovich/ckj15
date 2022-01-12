@@ -32,11 +32,10 @@ public class MySQLiteDataBase {
 
                 // String position = rs.getString("POSITIONS");
                 // System.out.println("Имя :" + str);
-                sb.append("Товар" + sResult);
-                //System.out.println("Возраст = "+age);
-                sb.append("Количество =  "+sResult1);
+                sb.append(" \nТовар ").append(sResult).append("\nКоличество =  ").append(sResult1);
                 // System.out.println("Заработная плата = "+salary);
             }
+            stm.close();
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             System.out.println("Ошибка с именем файла драйвера");
@@ -66,13 +65,14 @@ public class MySQLiteDataBase {
 
             // String position = rs.getString("POSITIONS");
             // System.out.println("Имя :" + str);
-            sb.append("Компания = " + sResult);
+            sb.append("Компания = ").append(sResult);
             //System.out.println("Возраст = "+age);
-            sb.append("\nГород =  " + sResult2);
-            sb.append("\nАдрес =  "+ sResult1);
+            sb.append("\nГород =  ").append(sResult2);
+            sb.append("\nАдрес =  ").append(sResult1);
             // System.out.println("Заработная плата = "+salary);
             System.out.println(sb);
         }
+        stm.close();
         if(sb.toString().isEmpty()){
             sb.append("No such company");
         }

@@ -69,12 +69,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "mytelega2021122700bot";
+        return "northwindMyBot";
     }
 
     @Override
     public String getBotToken() {
-        return "5034197038:AAEtAgGaXZ7A8bQBUyJWQqHEEV0bLXRX87c";
+        return "5026733639:AAEsS5Qqsz_Xi-xhTm6EIMBYF9swCD7ynJY";
     }
     /**
      * ћетод дл¤ настройки сообщени¤ и его отправки.
