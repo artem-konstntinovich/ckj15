@@ -38,7 +38,7 @@ public class Bot extends TelegramLongPollingBot {
             {
                 long chat_id = update.getMessage().getChatId();
                 sendMsg(update.getMessage().
-                        getChatId().toString(), "три команды: /time , /help  и /empl");
+                        getChatId().toString(), "пять команд: /time, /showID , /id= , /help  и /empl");
             }
             else if (message_text.equals("/empl"))
             {
@@ -46,11 +46,24 @@ public class Bot extends TelegramLongPollingBot {
                 long chat_id = update.getMessage().getChatId();
                 sendMsg(update.getMessage().
                         getChatId().toString(), messageSend);
-            } else if (message_text.contains("/id"))
+            }  else if (message_text.equals("/showID"))
             {
                 String messageSend = null;
                 try {
-                    messageSend = MySQLiteDataBase.customerById(message_text.replace("/id=",""));
+                    messageSend = MySQLiteDataBase.customerID();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                long chat_id = update.getMessage().getChatId();
+                sendMsg(update.getMessage().
+                        getChatId().toString(), messageSend);
+            }else if (message_text.contains("/id="))
+            {
+                String messageSend = null;
+                try {
+                    messageSend = MySQLiteDataBase.customerById(message_text.replace("/id=","").trim());
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
