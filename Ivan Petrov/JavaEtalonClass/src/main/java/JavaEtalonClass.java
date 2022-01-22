@@ -3,6 +3,16 @@ import MyObjects.MyUser;
 import java.util.*;
 
 public class JavaEtalonClass {
+
+    public static void printArray(MyUser[] array)
+    {
+        for (MyUser u: array)
+        {
+            System.out.println(u);
+        }
+    }
+
+
     public static <boolaen> void main(String[] args)
     {
         System.out.println("Hello from JavaEtalonClass");
@@ -34,11 +44,21 @@ public class JavaEtalonClass {
         arrUsers[1] = user2;
         arrUsers[2] = user3;
         System.out.println("Массив MyUser[] до сортировки");
-        for (MyUser u: arrUsers)
-        {
-            System.out.println(u);
-        }
-        //
+        //java 1.7
+        // printArray(arrUsers);
+        //java 1.8+
+        /**
+               имя функции (параметры функции)
+         {
+             тело функции
+         }
+
+                   (MyUser[] array) -> {for...}
+
+
+         */
+        // Arrays.asList(arrUsers).forEach(  (MyUser item) -> { System.out.println (item);} );
+        Arrays.asList(arrUsers).forEach(  item -> System.out.println (item) );
         Map<MyUser,String> map = new HashMap();// hasCode
         Map<String,MyUser> dictionary = new HashMap();
         //
