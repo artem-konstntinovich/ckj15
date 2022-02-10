@@ -11,7 +11,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class seleniumwebdrivertester {
+
     public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.gecko.driver","C:\\WebDrivers\\geckodriver.exe"); // Setting system properties of FirefoxDriver
+        WebDriver driver = new FirefoxDriver(); //Creating an object of FirefoxDriver
+        LoginPage loginPage = new LoginPage("LOGIN MINFIN",
+                "https://developers.minfin.com.ua/login/",
+                driver);
+        loginPage.printScreenToFile();
+        loginPage.navigateToLoginPage();
+        if (loginPage.canUseElements())
+        {
+            System.out.println("Заголовок 1 "+loginPage.getTitle());
+            System.out.println("Адрес 1 "+loginPage.getAddress());
+            loginPage.printScreenToFile();
+            loginPage = loginPage.login();
+            String actualAddress = loginPage.currentDriver().getCurrentUrl();
+            String expectedAddress = "https://developers.minfin.com.ua/";
+            System.out.println("actualAddress = "+actualAddress);
+            System.out.println("expectedAddress = "+expectedAddress);
+        }
+        else
+        {
+            System.out.println("Ошибка навигации");
+        }
+
+
+        Thread.sleep(5000);// пауза в 5 секунд = время отдыха JVM
+        driver.quit();
+
+    }
+
+    public static void main_local(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver","C:\\WebDrivers\\geckodriver.exe"); // Setting system properties of FirefoxDriver
         WebDriver driver = new FirefoxDriver(); //Creating an object of FirefoxDriver
@@ -96,7 +127,7 @@ public class seleniumwebdrivertester {
         driver.quit();
         //
     }
-    public static void main_prvious(String[] args) throws InterruptedException {
+    public static void main_previous(String[] args) throws InterruptedException {
         System.out.println("Hello from selenium webd river test");
         //
         System.setProperty("webdriver.gecko.driver","C:\\WebDrivers\\geckodriver.exe"); // Setting system properties of FirefoxDriver
