@@ -1,8 +1,6 @@
 
-import database.MySQLiteDataBase;
-
 //импорты
-import mytelegram.Bot;
+
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiRequestException;

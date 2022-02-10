@@ -1,13 +1,14 @@
-package mytelegram;
 
-import database.MySQLiteDataBase;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 import org.telegram.telegrambots.generics.LongPollingBot;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import static java.lang.Integer.parseInt;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -37,11 +38,35 @@ public class Bot extends TelegramLongPollingBot {
             {
                 long chat_id = update.getMessage().getChatId();
                 sendMsg(update.getMessage().
-                        getChatId().toString(), "три команды: /time , /help  и /empl");
+                        getChatId().toString(), "пять команд: /time, /showID , /id= , /help  и /empl");
             }
             else if (message_text.equals("/empl"))
             {
                 String messageSend = MySQLiteDataBase.getSelect();
+                long chat_id = update.getMessage().getChatId();
+                sendMsg(update.getMessage().
+                        getChatId().toString(), messageSend);
+            }  else if (message_text.equals("/showID"))
+            {
+                String messageSend = null;
+                try {
+                    messageSend = MySQLiteDataBase.customerID();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                long chat_id = update.getMessage().getChatId();
+                sendMsg(update.getMessage().
+                        getChatId().toString(), messageSend);
+            }else if (message_text.contains("/id="))
+            {
+                String messageSend = null;
+                try {
+                    messageSend = MySQLiteDataBase.customerById(message_text.replace("/id=","").trim());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 long chat_id = update.getMessage().getChatId();
                 sendMsg(update.getMessage().
                         getChatId().toString(), messageSend);
@@ -57,12 +82,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "mytelega2021122700bot";
+        return "northwindMyBot";
     }
 
     @Override
     public String getBotToken() {
-        return "5034197038:AAEtAgGaXZ7A8bQBUyJWQqHEEV0bLXRX87c";
+        return "5026733639:AAEsS5Qqsz_Xi-xhTm6EIMBYF9swCD7ynJY";
     }
     /**
      * ћетод дл¤ настройки сообщени¤ и его отправки.

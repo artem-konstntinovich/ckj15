@@ -51,6 +51,31 @@ public class MySQLiteDataBase {
         return sb.toString();
         //
     }
+    public static String customerID() throws SQLException, ClassNotFoundException {
+        StringBuilder sb = new StringBuilder();
+        String customer = "SELECT CustomerID FROM northwind.customers;";
+        Statement stm = connect().createStatement();
+
+        ResultSet rs = stm.executeQuery(customer);
+        while (rs.next())//просматриваем все строчки результата
+        {
+            String sResult = rs.getString("CustomerID");
+
+
+            // String position = rs.getString("POSITIONS");
+            // System.out.println("Имя :" + str);
+            sb.append("ID = ").append(sResult).append("\n");
+            //System.out.println("Возраст = "+age);
+
+            // System.out.println("Заработная плата = "+salary);
+            System.out.println(sb);
+        }
+        stm.close();
+        if(sb.toString().isEmpty()){
+            sb.append("No such company");
+        }
+        return sb.toString();
+    }
     public static String customerById(String id) throws SQLException, ClassNotFoundException {
         StringBuilder sb = new StringBuilder();
         String customer = "SELECT CompanyName, Address, City FROM northwind.customers where CustomerID = ?;";
