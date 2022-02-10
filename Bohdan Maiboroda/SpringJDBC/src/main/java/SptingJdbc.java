@@ -2,6 +2,7 @@
 // import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 //spring for jdbc
 import DAO.Employee;
@@ -35,17 +36,29 @@ public class SptingJdbc {
         // OracleDataSource, MySQLDataSource, SQLiteDataSource
         // источник резултатов выполненых хапросов - JBDCTamplate
 
+        Employee employeeParams = new Employee();
 
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource = Creater.createDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         System.out.println("Hello from getFilteredByName");
-        List<Employee> results = Employee.getFilteredByName(jdbcTemplate);
+        List<Employee> results = Employee.getFilteredByName(jdbcTemplate, employeeParams.getNameParam());
         results.forEach( e -> System.out.println(e));
         System.out.println("Hello from getAll");
         List<Employee> employees = Employee.getAll(jdbcTemplate);
         employees.forEach( e -> System.out.println(e));
+        System.out.println("Hello from getFilteredBySalary");
+        List salaryResult = Employee.getFilteredBySalary(jdbcTemplate, employeeParams.getSalaryParam());
+        salaryResult.forEach( sr -> System.out.println(sr) );
+
+
+
+        employeeParams.nameScanner();
+        List<Employee> newResult = Employee.getFilteredByName(jdbcTemplate, employeeParams.getNewNameParam());
+        newResult.forEach(nr -> System.out.println(nr));
     }
+
+
     //Синтаксис вызова параметра в запрос
     //Введение шаблона DAO Data Access Object (Layer)
     //

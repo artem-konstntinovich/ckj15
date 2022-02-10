@@ -8,8 +8,16 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Employee {
+
+
+
+    private String newNameParam ; // String variable for method nameScanner
+    private String nameParam = "Petriv";
+    private double salaryParam = 1111.11;
+
     //тексты запросов
     public static final String fullSelect = "SELECT NAME, AGE, SALARY FROM EMPLOYEES";
     public static final String salaryFilter = "SELECT NAME, AGE, SALARY FROM EMPLOYEES WHERE SALARY > ?";//символ ? - это параметр
@@ -20,6 +28,20 @@ public class Employee {
     public static final String nameFilter = "SELECT NAME, AGE, SALARY FROM EMPLOYEES WHERE NAME LIKE ?";
     //методы получения сотрудников
 
+    /**
+     * Method nameScanner returns  String  newNameParam
+     * like as param for method getFilteredByName
+     * @return
+     */
+    public String nameScanner(){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите фильтр для name");
+        newNameParam = scanner.nextLine();
+
+        return newNameParam;
+    }
+
     public static List<Employee> getAll(JdbcTemplate jdbcTemplate)
     {
         List<Employee> result = jdbcTemplate.
@@ -28,16 +50,27 @@ public class Employee {
                 );
         return result;
     }
-    public static List<Employee> getFilteredByName(JdbcTemplate jdbcTemplate)
+
+    public static List<Employee> getFilteredBySalary(JdbcTemplate jdbcTemplate, double salaryFilter){
+        List<Employee> result = jdbcTemplate.
+                query(Employee.salaryFilter,
+                        new Object[]{salaryFilter},
+                        new EmployeeRowMapper());
+        return result;
+    }
+
+    public static List<Employee> getFilteredByName(JdbcTemplate jdbcTemplate, String a)
     {
-        double salary = 1000.56;
+
         List<Employee> result = jdbcTemplate.
                 query(Employee.nameFilter, //текст запрос
-                        new Object[]{"I%"}  , //массив параметров для запроса, если они нужны
+                        new Object[]{a}  , //массив параметров для запроса, если они нужны
                         new EmployeeRowMapper()
                 );
         return result;
     }
+
+
     //описание таблицы в базе данных
     //количество столбцов их названия - все определяет таблица
     //сам класс Employee - описывает одну строку в таблице Employees
@@ -78,5 +111,29 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    public String getNameParam() {
+        return nameParam;
+    }
+
+    public void setNameParam(String nameParam) {
+        this.nameParam = nameParam;
+    }
+
+    public double getSalaryParam() {
+        return salaryParam;
+    }
+
+    public void setSalaryParam(double salaryParam) {
+        this.salaryParam = salaryParam;
+    }
+
+    public String getNewNameParam() {
+        return newNameParam;
+    }
+
+    public void setNewNameParam(String newNameParam) {
+        this.newNameParam = newNameParam;
     }
 }
