@@ -7,6 +7,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class seleniumwebdrivertester {
     public static void main(String[] args) {
 
+        // дЕКЛАРАЦИЯ О НАМЕРЕНИИ
+        //pageObject - задает струтуру страницы, которую тестируют
+        // заголовок
+        // адресс страницы
+        // скрин экрана
+        // навигация
+        //элементы для ввода найдены ()
+
+        // наслдеование конткретной старинцы сайт LoginPage
+
+    }
+    public static void main_local(String[] args) {
+
         System.setProperty("webdriver.chrome.driver","D:\\WebDrivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
