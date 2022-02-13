@@ -42,8 +42,7 @@ public class LoginPage extends PageObject{
 
 @Override
     public boolean canUseElements(){
-        this.username = this.driver.findElement(By.name("login"));
-        this.username = this.driver.findElement(By.name("password"));
+        this.username = this.driver.findElement(By.name = this.driver.findElement(By.name("password")));
         this.login = this.driver.findElement(By.cssSelector("button[type='submit']"));
 
         if(this.username == null){
@@ -54,5 +53,10 @@ public class LoginPage extends PageObject{
             return false;
     }return true;
 }
+    public WebDriver currentDriver()
+    {
+        return this.driver;
+    }
+
 
 }

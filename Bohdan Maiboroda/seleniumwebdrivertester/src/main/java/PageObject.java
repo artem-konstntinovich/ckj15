@@ -25,6 +25,14 @@ public class PageObject {
         this.driver.get(this.address);
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     public void printScreenToFile()
     {
         File screenshort =  ( (TakesScreenshot) driver ).getScreenshotAs(OutputType.FILE);

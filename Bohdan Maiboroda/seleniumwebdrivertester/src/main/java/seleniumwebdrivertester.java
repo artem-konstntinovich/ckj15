@@ -1,13 +1,18 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.checkerframework.checker.units.qual.C;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 public class seleniumwebdrivertester {
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws InterruptedException{
 
-        // дЕКЛАРАЦИЯ О НАМЕРЕНИИ
+        // ДЕКЛАРАЦИЯ О НАМЕРЕНИИ
         //pageObject - задает струтуру страницы, которую тестируют
         // заголовок
         // адресс страницы
@@ -16,6 +21,32 @@ public class seleniumwebdrivertester {
         //элементы для ввода найдены ()
 
         // наслдеование конткретной старинцы сайт LoginPage
+
+        System.setProperty("webdriver.chrome.driver","C:\\MyData\\WebDrivers\\chromedriver.exe"); // Setting system properties of FirefoxDriver
+        WebDriver driver = new ChromeDriver(); //Creating an object of FirefoxDriver
+        LoginPage loginPage = new LoginPage("LOGIN MINFIN",
+                "https://developers.minfin.com.ua/login/",
+                driver);
+        loginPage.printScreenToFile();
+        loginPage.navigateToLoginPage();
+        if (loginPage.canUseElements()) {
+            System.out.println("Заголовок 1 " + loginPage.getTitle());
+            System.out.println("Адрес 1 " + loginPage.getAddress());
+            loginPage.printScreenToFile();
+            loginPage = loginPage.login();
+            String actualAddress = loginPage.currentDriver().getCurrentUrl();
+            String expectedAddress = "https://developers.minfin.com.ua/";
+            System.out.println("actualAddress = "+actualAddress);
+            System.out.println("expectedAddress = "+expectedAddress);
+        }
+        else
+        {
+            System.out.println("Ошибка навигации");
+        }
+
+
+        Thread.sleep(5000);// пауза в 5 секунд = время отдыха JVM
+        driver.quit();
 
     }
     public static void main_local(String[] args) {
